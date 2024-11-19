@@ -1,4 +1,4 @@
-# picts
+# pics
 
 A new Flutter project.
 

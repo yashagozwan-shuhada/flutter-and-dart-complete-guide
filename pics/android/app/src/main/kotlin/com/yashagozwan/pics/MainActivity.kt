@@ -1,4 +1,4 @@
-package com.yashagozwan.picts
+package com.yashagozwan.pics
 
 import io.flutter.embedding.android.FlutterActivity
 
