@@ -7,10 +7,9 @@ environment:
   sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
-  book_resources:
-    path: ./packages/book_resources
   dart_frog: ^1.1.0
-  
+  sources:
+    path: ./sources
 
 dev_dependencies:
   mocktail: ^1.0.3
