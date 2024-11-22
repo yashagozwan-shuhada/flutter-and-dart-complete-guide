@@ -14,7 +14,7 @@ class _HomeScreenWithStreamState extends State<HomeScreenWithStream> {
 
   Stream<String> get stream => controller.stream.timeout(
         const Duration(milliseconds: 1000),
-        onTimeout: (sink) => sink.addError("you lose"),
+        onTimeout: (sink) => sink.addError('you lose'),
       );
 
   void _reload() {
@@ -44,24 +44,23 @@ class _HomeScreenWithStreamState extends State<HomeScreenWithStream> {
           mainAxisSize: MainAxisSize.min,
           children: [
             StreamBuilder<String>(
-              initialData: null,
               stream: stream,
               builder: (context, snapshot) {
                 if (snapshot.hasError) {
-                  return Text("${snapshot.error}");
+                  return Text('${snapshot.error}');
                 }
 
                 if (snapshot.data != null) {
-                  return Text("${snapshot.data}");
+                  return Text('${snapshot.data}');
                 }
                 return const SizedBox.shrink();
               },
             ),
             ElevatedButton(
               onPressed: () {
-                controller.sink.add("You Clicking...");
+                controller.sink.add('You Clicking...');
               },
-              child: const Text("Click Me"),
+              child: const Text('Click Me'),
             ),
           ],
         ),

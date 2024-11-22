@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -18,7 +17,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     _timer = Timer(const Duration(milliseconds: 1000), () {
-      setState(() => title = "You Loser !");
+      setState(() => title = 'You Loser !');
     });
     super.initState();
   }
@@ -33,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
 
     _timer = Timer(const Duration(milliseconds: 1000), () {
-      setState(() => title = "You Loser !");
+      setState(() => title = 'You Loser !');
     });
   }
 
@@ -50,12 +49,10 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            if (title != null) Text("$title"),
+            if (title != null) Text('$title'),
             FilledButton(
-              onPressed: () {
-                onClick();
-              },
-              child: const Text("Click Me"),
+              onPressed: onClick,
+              child: const Text('Click Me'),
             ),
           ],
         ),
