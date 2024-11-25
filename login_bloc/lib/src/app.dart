@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:login_bloc/src/blocs/provider.dart';
-import 'package:login_bloc/src/screens/login_screen.dart';
+import 'package:login_bloc/src/screens/home_screen.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -10,7 +10,7 @@ class App extends StatelessWidget {
     return Provider(
       child: const MaterialApp(
         title: 'Log Me In',
-        home: LoginScreen(),
+        home: HomeScreen(),
       ),
     );
   }

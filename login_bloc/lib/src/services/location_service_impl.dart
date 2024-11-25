@@ -6,6 +6,16 @@ import 'package:permission_handler/permission_handler.dart' as handler;
 class LocationServiceImpl implements LocationService {
   final _location = Location();
 
+  Future<CoordinateModel> _getCoordinateNoRequestService() async {
+    final locationData = await _location.getLocation();
+
+    return CoordinateModel(
+      latitude: locationData.latitude,
+      longitude: locationData.longitude,
+      isMocked: locationData.isMock,
+    );
+  }
+
   @override
   Future<CoordinateModel> getCoordinate() async {
     await requestService();
@@ -48,5 +58,23 @@ class LocationServiceImpl implements LocationService {
       case PermissionStatus.deniedForever:
         return LocationStatus.deniedForever;
     }
+  }
+
+  @override
+  Future<CoordinateModel?> getCoordinateWithRequestPermission() async {
+    final isEnable = await isGpsEnable();
+
+    if (!isEnable) {
+      await requestService();
+    }
+
+    final status = await getStatus();
+
+    if (status == LocationStatus.denied ||
+        status == LocationStatus.deniedForever) {
+      return null;
+    }
+
+    return _getCoordinateNoRequestService();
   }
 }

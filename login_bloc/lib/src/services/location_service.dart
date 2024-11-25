@@ -17,5 +17,7 @@ abstract interface class LocationService {
 
   Future<CoordinateModel> getCoordinate();
 
+  Future<CoordinateModel?> getCoordinateWithRequestPermission();
+
   Future<void> openAppSettings();
 }

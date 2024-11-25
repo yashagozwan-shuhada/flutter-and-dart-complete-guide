@@ -24,7 +24,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
       if (status == LocationStatus.denied ||
           status == LocationStatus.deniedForever) {
-        showAlert();
+        if (context.mounted) {
+          showAlert(context);
+        }
       } else {
         _coordinate = await _locationService.getCoordinate();
         setState(() {});
@@ -32,50 +34,72 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  void showAlert() {
-    showDialog<void>(
-      context: context,
-      builder: (context) {
-        return AlertDialog.adaptive(
-          content: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Image.asset(
-                ImageAssetPath.gps,
-                width: 150,
-                height: 150,
-              ),
-              const SizedBox(height: 16),
-              const Text(
-                'GPS',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const Text(
-                'Permission gps is disabled, go to settings and enable gps service',
-                textAlign: TextAlign.center,
-                style: TextStyle(),
-              ),
-              const SizedBox(height: 16),
-              FilledButton(
-                onPressed: () => _locationService.openAppSettings(),
-                child: const Text('Go to Settings'),
-              ),
-            ],
-          ),
-        );
-      },
-    );
+  Future<void> _initialV2() async {
+    _locationService = LocationServiceImpl();
+    var result = await _locationService.getCoordinateWithRequestPermission();
+    while (result == null) {
+      if (context.mounted) {
+        await showAlert(context);
+        result = await _locationService.getCoordinateWithRequestPermission();
+      }
+    }
+
+    _coordinate = result;
+    setState(() {});
   }
 
   @override
   void initState() {
-    _initial();
+    _initialV2();
     super.initState();
+  }
+
+  Future<void> showAlert(BuildContext context) async {
+    await showDialog<void>(
+      context: context,
+      builder: (context) {
+        return PopScope(
+          canPop: false,
+          child: AlertDialog.adaptive(
+            content: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Image.asset(
+                  ImageAssetPath.gps,
+                  width: 150,
+                  height: 150,
+                ),
+                const SizedBox(height: 16),
+                const Text(
+                  'GPS',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const Text(
+                  'Permission gps is disabled, go to settings and enable gps service',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(),
+                ),
+                const SizedBox(height: 16),
+                FilledButton(
+                  onPressed: () => _locationService.openAppSettings(),
+                  child: const Text('Go to Settings'),
+                ),
+                const SizedBox(height: 8),
+                OutlinedButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text('Close'),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -91,7 +115,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 'latitude: ${_coordinate?.latitude}, longitude: ${_coordinate?.longitude}',
               ),
             ElevatedButton(
-              onPressed: showAlert,
+              onPressed: () {
+                showAlert(context);
+              },
               child: const Text(
                 'Show Settings',
               ),
