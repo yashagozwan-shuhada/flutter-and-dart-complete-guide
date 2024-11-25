@@ -17,10 +17,10 @@ class _AnimationScreenState extends State<AnimationScreen>
   void initState() {
     _catController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 1000),
+      duration: const Duration(milliseconds: 200),
     );
 
-    _catAnimation = Tween<double>(begin: -50, end: -90).animate(
+    _catAnimation = Tween<double>(begin: -35, end: -80).animate(
       CurvedAnimation(
         parent: _catController,
         curve: Curves.easeIn,
@@ -37,6 +37,14 @@ class _AnimationScreenState extends State<AnimationScreen>
     super.dispose();
   }
 
+  void _onTap() {
+    if (_catController.status == AnimationStatus.completed) {
+      _catController.reverse();
+    } else if (_catController.status == AnimationStatus.dismissed) {
+      _catController.forward();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,21 +57,14 @@ class _AnimationScreenState extends State<AnimationScreen>
           child: Stack(
             clipBehavior: Clip.none,
             children: [
-              buildBox(),
               buildCatAnimation(),
+              buildBox(),
+              buildLeftFlap(),
             ],
           ),
         ),
       ),
     );
-  }
-
-  void _onTap() {
-    if (_catController.status == AnimationStatus.completed) {
-      _catController.reverse();
-    } else if (_catController.status == AnimationStatus.dismissed) {
-      _catController.forward();
-    }
   }
 
   Widget buildCatAnimation() {
@@ -86,6 +87,14 @@ class _AnimationScreenState extends State<AnimationScreen>
       height: 200,
       width: 200,
       color: Colors.grey,
+    );
+  }
+
+  Widget buildLeftFlap() {
+    return Container(
+      height: 10,
+      width: 125,
+      color: Colors.red,
     );
   }
 }
