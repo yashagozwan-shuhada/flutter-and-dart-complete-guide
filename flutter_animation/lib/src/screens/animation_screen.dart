@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_animation/src/widgets/cat_widget.dart';
 
@@ -9,12 +11,42 @@ class AnimationScreen extends StatefulWidget {
 }
 
 class _AnimationScreenState extends State<AnimationScreen>
-    with TickerProviderStateMixin {
+    with TickerProviderStateMixin<AnimationScreen> {
   late final Animation<double> _catAnimation;
   late final AnimationController _catController;
 
+  late final Animation<double> _boxAnimation;
+  late final AnimationController _boxController;
+
   @override
   void initState() {
+    _boxController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 300),
+    );
+
+    _boxAnimation = Tween<double>(
+      begin: pi * 0.6,
+      end: pi * 0.65,
+    ).animate(
+      CurvedAnimation(
+        parent: _boxController,
+        curve: Curves.easeInOut,
+      ),
+    );
+
+    _boxAnimation.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        _boxController.reverse();
+      }
+
+      if (status == AnimationStatus.dismissed) {
+        _boxController.forward();
+      }
+    });
+
+    _boxController.forward();
+
     _catController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 200),
@@ -39,8 +71,10 @@ class _AnimationScreenState extends State<AnimationScreen>
 
   void _onTap() {
     if (_catController.status == AnimationStatus.completed) {
+      _boxController.forward();
       _catController.reverse();
     } else if (_catController.status == AnimationStatus.dismissed) {
+      _boxController.stop();
       _catController.forward();
     }
   }
@@ -60,6 +94,7 @@ class _AnimationScreenState extends State<AnimationScreen>
               buildCatAnimation(),
               buildBox(),
               buildLeftFlap(),
+              buildRightFlap(),
             ],
           ),
         ),
@@ -91,10 +126,44 @@ class _AnimationScreenState extends State<AnimationScreen>
   }
 
   Widget buildLeftFlap() {
-    return Container(
-      height: 10,
-      width: 125,
-      color: Colors.red,
+    return Positioned(
+      left: 3,
+      child: AnimatedBuilder(
+        animation: _boxController,
+        builder: (context, child) {
+          return Transform.rotate(
+            angle: _boxAnimation.value,
+            alignment: Alignment.topLeft,
+            child: child,
+          );
+        },
+        child: Container(
+          height: 10,
+          width: 125,
+          color: Colors.red,
+        ),
+      ),
+    );
+  }
+
+  Widget buildRightFlap() {
+    return Positioned(
+      right: 3,
+      child: AnimatedBuilder(
+        animation: _boxController,
+        builder: (context, child) {
+          return Transform.rotate(
+            angle: -_boxAnimation.value,
+            alignment: Alignment.topRight,
+            child: child,
+          );
+        },
+        child: Container(
+          height: 10,
+          width: 125,
+          color: Colors.red,
+        ),
+      ),
     );
   }
 }
