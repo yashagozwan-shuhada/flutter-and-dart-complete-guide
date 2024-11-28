@@ -1,42 +1,51 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:sqflite/sqflite.dart';
-import 'package:sqflite_common_ffi/sqflite_ffi.dart'
-    show databaseFactoryFfiNoIsolate, sqfliteFfiInit;
+import 'package:hacker_news/src/constants/sql_command.dart';
+import 'package:hacker_news/src/model/item_model.dart';
+import 'package:hacker_news/src/provider/news_db_provider.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+
+class MockNewsDbProvider extends NewsDbProvider {
+  @override
+  Future<void> init() async {
+    sqfliteFfiInit();
+    databaseFactory = databaseFactoryFfiNoIsolate;
+    database = await openDatabase(
+      inMemoryDatabasePath,
+      version: 1,
+      onCreate: (db, version) {
+        db.execute(SqlCommand.createTableItems);
+      },
+    );
+  }
+}
 
 void main() {
-  group("", () {
-    setUp(() {
-      sqfliteFfiInit();
-      databaseFactory = databaseFactoryFfiNoIsolate;
+  group('NewsDbProvider', () {
+    late MockNewsDbProvider mockNewsDbProvider;
+
+    setUpAll(() async {
+      mockNewsDbProvider = MockNewsDbProvider();
+      await mockNewsDbProvider.init();
     });
 
-    setUpAll(() {});
-
-    test("should create table and insert users data ", () async {
-      final db = await openDatabase(
-        inMemoryDatabasePath,
-        version: 1,
-        onCreate: (db, version) async {
-          await db.execute("""CREATE TABLE IF NOT EXISTS users(
-              name TEXT NOT NULL
-            );
-            """);
-        },
+    test('should return int when addItem called', () async {
+      final item = ItemModel(
+        by: 'John Doe',
+        kids: [1],
+        deleted: true,
+        dead: false,
       );
+      final result = await mockNewsDbProvider.addItem(item);
+      expect(result, 1);
+    });
 
-      final rowAffected = await db.insert('users', {'name': 'yasha'});
-      expect(rowAffected, 1);
-
-      final users = await db.query("users");
-
-      expect(
-        users,
-        [
-          {'name': 'yasha'}
-        ],
-      );
-
-      await db.close();
+    test('should return item model when getItem called', () async {
+      final item = await mockNewsDbProvider.getItem(1);
+      expect(item, isA<ItemModel>());
+      expect(item?.by, 'John Doe');
+      expect(item?.kids, [1]);
+      expect(item?.deleted, true);
+      expect(item?.dead, false);
     });
   });
 }
