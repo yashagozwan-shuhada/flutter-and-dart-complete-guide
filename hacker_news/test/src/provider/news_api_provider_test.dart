@@ -29,12 +29,12 @@ void main() {
     test('should return a instance of ItemModel when getItem called', () async {
       final item = await newsApiProvider.getItem(8863);
       expect(item, isA<ItemModel>());
-      expect(item.id, 8863);
-      expect(item.type, 'story');
-      expect(item.by, 'dhouston');
-      expect(item.kids, isList);
-      expect(item.kids, isA<List<int>>());
-      expect(item.kids, isNotEmpty);
+      expect(item?.id, 8863);
+      expect(item?.type, 'story');
+      expect(item?.by, 'dhouston');
+      expect(item?.kids, isList);
+      expect(item?.kids, isA<List<int>>());
+      expect(item?.kids, isNotEmpty);
     });
   });
 
@@ -71,7 +71,7 @@ void main() {
     test('should return a instance of ItemModel when getItem called', () async {
       final item = await newsApiProvider.getItem(777);
       expect(item, isA<ItemModel>());
-      expect(item.id, 777);
+      expect(item?.id, 777);
     });
   });
 }

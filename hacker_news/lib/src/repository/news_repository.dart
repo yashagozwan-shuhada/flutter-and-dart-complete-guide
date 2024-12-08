@@ -13,11 +13,11 @@ class NewsRepository {
 
   Future<List<int>> getTopIds() => _apiProvider.getTopIds();
 
-  Future<ItemModel> getItem(int id) async {
+  Future<ItemModel?> getItem(int id) async {
     var item = await _dbProvider.getItem(id);
     if (item != null) return item;
     item = await _apiProvider.getItem(id);
-    await _dbProvider.addItem(item);
+    await _dbProvider.addItem(item!);
     return item;
   }
 }

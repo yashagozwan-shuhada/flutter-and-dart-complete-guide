@@ -1,4 +1,4 @@
-package com.yashagozwan.hacker_news
+package com.example.hacker_news
 
 import io.flutter.embedding.android.FlutterActivity
 

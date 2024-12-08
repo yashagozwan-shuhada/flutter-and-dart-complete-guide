@@ -9,7 +9,7 @@ class MockNewsDbProvider extends NewsDbProvider {
   Future<void> init() async {
     sqfliteFfiInit();
     databaseFactory = databaseFactoryFfiNoIsolate;
-    database = await openDatabase(
+    NewsDbProvider.database = await openDatabase(
       inMemoryDatabasePath,
       version: 1,
       onCreate: (db, version) {
@@ -25,7 +25,6 @@ void main() {
 
     setUpAll(() async {
       mockNewsDbProvider = MockNewsDbProvider();
-      await mockNewsDbProvider.init();
     });
 
     test('should return int when addItem called', () async {
