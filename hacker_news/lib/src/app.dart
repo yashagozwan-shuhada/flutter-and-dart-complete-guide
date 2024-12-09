@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:hacker_news/src/blocs/comments_bloc.dart';
 import 'package:hacker_news/src/blocs/comments_provider.dart';
@@ -26,6 +28,8 @@ class App extends StatelessWidget {
     if (settings.name == '/') {
       return MaterialPageRoute(
         builder: (context) {
+          final bloc = StoriesProvider.of(context);
+          unawaited(bloc.fetchTopIds());
           return const NewsScreen();
         },
       );
