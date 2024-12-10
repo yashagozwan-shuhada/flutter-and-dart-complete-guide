@@ -14,6 +14,8 @@ import 'package:flutter_testing/data/repository/prod/coin_repository_impl.dart'
     as _i485;
 import 'package:flutter_testing/domain/repository/coin_repository.dart'
     as _i794;
+import 'package:flutter_testing/presentation/features/home/bloc/home_bloc.dart'
+    as _i283;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
@@ -39,6 +41,8 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i485.CoinRepositoryImpl(),
       registerFor: {_prod},
     );
+    gh.factory<_i283.HomeBloc>(
+        () => _i283.HomeBloc(gh<_i794.CoinRepository>()));
     return this;
   }
 }

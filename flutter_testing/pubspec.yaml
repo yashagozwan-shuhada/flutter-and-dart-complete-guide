@@ -41,6 +41,8 @@ dependencies:
   built_value: ^8.9.2
   flutter_bloc: ^8.1.6
   args: ^2.6.0
+  freezed_annotation: ^2.4.4
+  fpdart: ^1.1.1
 
 dev_dependencies:
   flutter_test:
@@ -51,12 +53,13 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^4.0.0
   build_runner: ^2.4.13
   mockito: ^5.4.4
   injectable_generator: ^2.6.2
   json_serializable: ^6.9.0
   very_good_analysis: ^6.0.0
+  freezed: ^2.5.7
+  bloc_test: ^9.1.7
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
