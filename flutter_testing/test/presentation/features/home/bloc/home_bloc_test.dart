@@ -56,7 +56,7 @@ void main() {
     });
 
     blocTest<HomeBloc, HomeState>(
-      'Initial',
+      'Initial Positive Case',
       build: () => HomeBloc(coinRepository),
       setUp: () {
         when(coinRepository.getCoins(1, 10)).thenAnswer(
