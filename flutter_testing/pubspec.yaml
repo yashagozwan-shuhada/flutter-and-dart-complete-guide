@@ -43,6 +43,8 @@ dependencies:
   args: ^2.6.0
   freezed_annotation: ^2.4.4
   fpdart: ^1.1.1
+  flutter_native_splash: ^2.4.3
+  flutter_flavor: ^3.1.4
 
 dev_dependencies:
   flutter_flavorizr: ^2.2.3
@@ -61,6 +63,7 @@ dev_dependencies:
   very_good_analysis: ^6.0.0
   freezed: ^2.5.7
   bloc_test: ^9.1.7
+  icons_launcher: ^3.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -72,6 +75,12 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  assets:
+    - assets/
+    - assets/images/
+    - assets/app_icon/
+    - assets/app_splash/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

@@ -5,23 +5,25 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "App Debug",
+      "name": "FLAVOR-DEV",
       "request": "launch",
-      "toolArgs": ["--dart-define=env=debug"],
+      "program": "lib/main_dev.dart",
+      "args": ["--flavor", "dev"],
       "type": "dart"
     },
     {
-      "name": "App Fake",
+      "name": "FLAVOR-FAKE",
       "request": "launch",
-      "toolArgs": ["--dart-define=env=fake"],
+      "program": "lib/main_fake.dart",
+      "args": ["--flavor", "fake"],
       "type": "dart"
     },
     {
-      "name": "App Prod",
+      "name": "FLAVOR-PROD",
       "request": "launch",
-      "toolArgs": [],
-      "type": "dart",
-      "flutterMode": "release"
+      "program": "lib/main_prod.dart",
+      "args": ["--flavor", "prod"],
+      "type": "dart"
     }
   ]
 }
