@@ -16,6 +16,8 @@ import 'package:flutter_testing/domain/repository/coin_repository.dart'
     as _i794;
 import 'package:flutter_testing/presentation/features/home/bloc/home_bloc.dart'
     as _i283;
+import 'package:flutter_testing/presentation/features/onboarding/cubit/onboarding_cubit.dart'
+    as _i575;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
@@ -33,6 +35,7 @@ extension GetItInjectableX on _i174.GetIt {
       environment,
       environmentFilter,
     );
+    gh.factory<_i575.OnboardingCubit>(() => _i575.OnboardingCubit());
     gh.lazySingleton<_i794.CoinRepository>(
       () => _i557.FakeCoinRepository(),
       registerFor: {_test},
