@@ -45,6 +45,7 @@ dependencies:
   fpdart: ^1.1.1
 
 dev_dependencies:
+  flutter_flavorizr: ^2.2.3
   flutter_test:
     sdk: flutter
 

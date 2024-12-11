@@ -1,0 +1,22 @@
+flavors:
+  dev:
+    app:
+      name: "Sky Dev"
+    android:
+      applicationId: "com.yashagozwan.sky.dev"
+    ios:
+      bundleId: "com.yashagozwan.sky.dev"
+  fake:
+    app:
+      name: "Sky Fake"
+    android:
+      applicationId: "com.yashagozwan.sky.fake"
+    ios:
+      bundleId: "com.yashagozwan.sky.fake"
+  prod:
+    app:
+      name: "Sky"
+    android:
+      applicationId: "com.yashagozwan.sky.prod"
+    ios:
+      bundleId: "com.yashagozwan.sky.prod"
