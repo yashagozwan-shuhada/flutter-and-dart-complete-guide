@@ -11,7 +11,7 @@ class Prompter {
     return input.contains('y');
   }
 
-  Option askMultiple(String prompt, List<Option> options) {
+  Option<T> askMultiple<T>(String prompt, List<Option<T>> options) {
     final input = _ask(prompt, options);
 
     try {
@@ -23,7 +23,7 @@ class Prompter {
     }
   }
 
-  String _ask(String prompt, List<Option> options) {
+  String _ask<T>(String prompt, List<Option<T>> options) {
     _terminal
       ..clearScreen()
       ..printPrompt(prompt)
