@@ -1,8 +1,6 @@
-/// Support for doing something awesome.
-///
-/// More dartdocs go here.
+/// This library does important things
 library;
 
-export 'src/dart_testing_base.dart';
-
-// TODO: Export any libraries intended for clients of this package.
+export 'src/option.dart';
+export 'src/prompter.dart';
+export 'src/terminal.dart';
