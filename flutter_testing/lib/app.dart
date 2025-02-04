@@ -12,6 +12,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return FlavorBanner(
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         home: BlocProvider(
           create: (context) => getIt<OnboardingCubit>(),
           child: const OnboardingScreen(),

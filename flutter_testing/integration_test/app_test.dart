@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_testing/core/di/di.dart';
-import 'package:flutter_testing/presentation/features/home/bloc/home_bloc.dart';
-import 'package:flutter_testing/presentation/features/home/home_screen.dart';
 import 'package:flutter_testing/presentation/features/onboarding/cubit/onboarding_cubit.dart';
 import 'package:flutter_testing/presentation/features/onboarding/onboarding_screen.dart';
 import 'package:injectable/injectable.dart';

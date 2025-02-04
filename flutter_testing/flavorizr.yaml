@@ -31,4 +31,9 @@ instructions:
   - assets:download
   - assets:extract
   - ios:xcconfig
+  - ios:podfile
+  - ios:plist
+  - ios:schema
+  - ide:config
+  - ios:buildTargets
   - assets:clean

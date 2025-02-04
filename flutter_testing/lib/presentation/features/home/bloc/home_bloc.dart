@@ -1,8 +1,5 @@
 import 'dart:async';
-import 'dart:ffi';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_testing/core/constants/app_status.dart';
 import 'package:flutter_testing/domain/model/coin_model.dart';
 import 'package:flutter_testing/domain/repository/coin_repository.dart';

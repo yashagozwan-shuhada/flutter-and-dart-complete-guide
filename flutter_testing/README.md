@@ -1,15 +1,15 @@
 # Flutter Testing
 
-## Create app splash with flavors
+## Generate Flavors App
 
 ```bash
-sh generate_app_splash.sh
+dart run flutter_flavorizr
 ```
 
-## Create app icon with flavors
+## Create app icon splash with flavors
 
 ```bash
-sh generate_app_icon.sh
+sh generate_app_icon_splash.sh
 ```
 
 ## Running Unit Test and Widget Test
